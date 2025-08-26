@@ -1,65 +1,244 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your entire site, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# `jekyll serve`. If you change this file, please restart the server process.
+# # Welcome to Jekyll!
+# #
+# # This config file is meant for settings that affect your entire site, values
+# # which you are expected to set up once and rarely need to edit after that.
+# # For technical reasons, this file is *NOT* reloaded automatically when you use
+# # `jekyll serve`. If you change this file, please restart the server process.
 
-# Site Settings
-title                    : "严海轩"
-description              : "机器人学与智能控制"
-repository               : "Bubble252/Bubble252.github.io"
-google_scholar_stats_use_cdn : false
+# # Site Settings
+# title                    : "严海轩"
+# description              : "机器人学与智能控制"
+# repository               : "Bubble252/Bubble252.github.io"
+# google_scholar_stats_use_cdn : false
 
-# google analytics
-google_analytics_id      :  # get google_analytics_id from https://analytics.google.com/analytics/
+# # google analytics
+# google_analytics_id      :  # get google_analytics_id from https://analytics.google.com/analytics/
 
-# SEO Related
-google_site_verification :  fQZQD0EwLaSOrp3EbALt2rjxHEY9pUvWuh1fS96xgNk # get google_site_verification from https://search.google.com/search-console/about
-bing_site_verification   : 56D1B3DBCF345410DA9431AFE01788E7 # get bing_site_verification from https://www.bing.com/webmasters/about
-baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.baidu.com/login/index?u=/site/index
+# # SEO Related
+# google_site_verification :  fQZQD0EwLaSOrp3EbALt2rjxHEY9pUvWuh1fS96xgNk # get google_site_verification from https://search.google.com/search-console/about
+# bing_site_verification   : 56D1B3DBCF345410DA9431AFE01788E7 # get bing_site_verification from https://www.bing.com/webmasters/about
+# baidu_site_verification  :  # get baidu_site_verification from https://ziyuan.baidu.com/login/index?u=/site/index
 
-# Site Author
+# # Site Author
+# author:
+#   name             : "严海轩"
+#   avatar           : "images/my_photo.jpg"
+#   bio              : "重庆大学"
+#   location         : "重庆"
+#   employer         : #"Hefei General Machinery Research Institute"
+#   pubmed           : 
+#   googlescholar    : "https://scholar.google.com/citations?user=WMkMTb4AAAAJ"
+#   email            : "yanhaixuan4@gmail.com"
+#   researchgate     : "https://www.researchgate.net/profile/Jian-Tang-53"
+#   uri              : 
+#   bitbucket        :
+#   codepen          :
+#   dribbble         :
+#   flickr           :
+#   facebook         :
+#   foursquare       :
+#   github           : "Bubble252"
+#   google_plus      :
+#   keybase          :
+#   instagram        :
+#   impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
+#   lastfm           :
+#   linkedin         : # e.g., "linkedin username"
+#   dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
+#   orcid            : "https://orcid.org/0000-0001-9658-209X"
+#   pinterest        :
+#   soundcloud       :
+#   stackoverflow    : # http://stackoverflow.com/users/123456/username
+#   steam            :
+#   tumblr           :
+#   twitter          : 
+#   vine             :
+#   weibo            :
+#   xing             :
+#   youtube          :
+#   wikipedia        :
+
+
+# # Reading Files
+# include:
+#   - .htaccess
+#   - _pages
+#   - files
+# exclude:
+#   - docs
+#   - google_scholar_crawler
+#   - "*.sublime-project"
+#   - "*.sublime-workspace"
+#   - .asset-cache
+#   - .bundle
+#   - .jekyll-assets-cache
+#   - .sass-cache
+#   - .github
+#   - CHANGELOG
+#   - Capfile
+#   - Gemfile
+#   - Gruntfile.js
+#   - LICENSE
+#   - README
+#   - Rakefile
+#   - assets/js/_main.js
+#   - assets/js/plugins
+#   - assets/js/vendor
+#   - config
+#   - gulpfile.js
+#   - log
+#   - node_modules
+#   - package.json
+#   - tmp
+#   - vendor
+# keep_files:
+#   - .git
+#   - .svn
+# encoding: "utf-8"
+# markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+
+# # Conversion
+# markdown: kramdown
+# highlighter: rouge
+# lsi: false
+# excerpt_separator: "\n\n"
+# incremental: false
+
+
+# # Markdown Processing
+# kramdown:
+#   input: GFM
+#   hard_wrap: false
+#   auto_ids: true
+#   footnote_nr: 1
+#   entity_output: as_char
+#   toc_levels: 1..6
+#   smart_quotes: lsquo,rsquo,ldquo,rdquo
+#   enable_coderay: false
+
+# # Defaults
+# defaults:
+#   # _pages
+#   - scope:
+#       path: ""
+#       type: pages
+#     values:
+#       layout: default
+#       author_profile: true
+
+
+# # Sass/SCSS
+# sass:
+#   sass_dir: _sass
+#   style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+
+
+# # Outputting
+# permalink: /:categories/:title/
+# timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+
+
+# # Plugins
+# plugins:
+#  - jekyll-paginate
+#  - jekyll-sitemap
+#  - jekyll-gist
+#  - jekyll-feed
+#  - jekyll-redirect-from
+# # mimic GitHub Pages with --safe
+
+# # plugins:
+# #   - jekyll-paginate
+# #   - jekyll-sitemap
+# #   - jekyll-gist
+# #   - jekyll-feed
+# #   - jekyll-redirect-from
+# #   - jemoji
+# #   - jekyll-polyglot
+
+# # languages: ["zh", "en"]
+# # default_lang: "en"
+
+# whitelist:
+#   - jekyll-paginate
+#   - jekyll-sitemap
+#   - jekyll-gist
+#   - jekyll-feed
+#   - jemoji
+
+
+# # HTML Compression
+# # - http://jch.penibelst.de/
+# compress_html:
+#   clippings: all
+#   ignore:
+#     envs: development
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# ------------------ Site Settings ------------------
+title: "严海轩"
+description: "机器人学与智能控制"
+repository: "Bubble252/Bubble252.github.io"
+google_scholar_stats_use_cdn: false
+
+google_analytics_id: 
+google_site_verification: fQZQD0EwLaSOrp3EbALt2rjxHEY9pUvWuh1fS96xgNk
+bing_site_verification: 56D1B3DBCF345410DA9431AFE01788E7
+baidu_site_verification: 
+
+# ------------------ Author Info ------------------
 author:
-  name             : "严海轩"
-  avatar           : "images/my_photo.jpg"
-  bio              : "重庆大学"
-  location         : "重庆"
-  employer         : #"Hefei General Machinery Research Institute"
-  pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=WMkMTb4AAAAJ"
-  email            : "yanhaixuan4@gmail.com"
-  researchgate     : "https://www.researchgate.net/profile/Jian-Tang-53"
-  uri              : 
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  flickr           :
-  facebook         :
-  foursquare       :
-  github           : "Bubble252"
-  google_plus      :
-  keybase          :
-  instagram        :
-  impactstory      : # e.g., "https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
-  lastfm           :
-  linkedin         : # e.g., "linkedin username"
-  dblp             : # e.g., "https://dblp.org/pid/xx/xxxx.html"
-  orcid            : "https://orcid.org/0000-0001-9658-209X"
-  pinterest        :
-  soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
-  steam            :
-  tumblr           :
-  twitter          : 
-  vine             :
-  weibo            :
-  xing             :
-  youtube          :
-  wikipedia        :
+  name: "严海轩"
+  avatar: "images/my_photo.jpg"
+  bio: "重庆大学"
+  location: "重庆"
+  googlescholar: "https://scholar.google.com/citations?user=WMkMTb4AAAAJ"
+  email: "yanhaixuan4@gmail.com"
+  researchgate: "https://www.researchgate.net/profile/Jian-Tang-53"
+  github: "Bubble252"
+  orcid: "https://orcid.org/0000-0001-9658-209X"
 
-
-# Reading Files
+# ------------------ Include/Exclude ------------------
 include:
   - .htaccess
   - _pages
@@ -91,22 +270,20 @@ exclude:
   - package.json
   - tmp
   - vendor
+
 keep_files:
   - .git
   - .svn
+
+# ------------------ Markdown ------------------
 encoding: "utf-8"
 markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
-
-# Conversion
 markdown: kramdown
 highlighter: rouge
 lsi: false
 excerpt_separator: "\n\n"
 incremental: false
 
-
-# Markdown Processing
 kramdown:
   input: GFM
   hard_wrap: false
@@ -117,49 +294,38 @@ kramdown:
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-# Defaults
+# ------------------ Defaults ------------------
 defaults:
-  # _pages
   - scope:
       path: ""
       type: pages
     values:
       layout: default
       author_profile: true
+      lang: "zh"  # 默认语言
 
-
-# Sass/SCSS
+# ------------------ Sass ------------------
 sass:
   sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  style: compressed
 
-
-# Outputting
+# ------------------ Output ------------------
 permalink: /:categories/:title/
-timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Asia/Shanghai
 
-
-# Plugins
+# ------------------ Plugins ------------------
 plugins:
  - jekyll-paginate
  - jekyll-sitemap
  - jekyll-gist
  - jekyll-feed
  - jekyll-redirect-from
-# mimic GitHub Pages with --safe
+ - jekyll-polyglot  # 多语言支持
 
-# plugins:
-#   - jekyll-paginate
-#   - jekyll-sitemap
-#   - jekyll-gist
-#   - jekyll-feed
-#   - jekyll-redirect-from
-#   - jemoji
-#   - jekyll-polyglot
+languages: ["zh", "en"]  # 支持中文和英文
+default_lang: "zh"       # 默认中文
 
-# languages: ["zh", "en"]
-# default_lang: "en"
-
+# ------------------ Whitelist ------------------
 whitelist:
   - jekyll-paginate
   - jekyll-sitemap
@@ -167,9 +333,7 @@ whitelist:
   - jekyll-feed
   - jemoji
 
-
-# HTML Compression
-# - http://jch.penibelst.de/
+# ------------------ HTML 压缩 ------------------
 compress_html:
   clippings: all
   ignore:

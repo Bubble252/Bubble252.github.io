@@ -1,4 +1,4 @@
----
+<!-- ---
 permalink: /
 title: ""
 excerpt: ""
@@ -6,7 +6,18 @@ author_profile: true
 redirect_from: 
   - /about/
   - /about.html
+--- -->
+
 ---
+permalink: /
+title: "关于我"
+excerpt: "严海轩的学术主页，研究机器人学与智能控制。"
+author_profile: true
+redirect_from: 
+  - /about/
+  - /about.html
+---
+
 
 {% if site.google_scholar_stats_use_cdn %}
 {% assign gsDataBaseUrl = "https://cdn.jsdelivr.net/gh/" | append: site.repository | append: "@" %}
