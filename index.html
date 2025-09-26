@@ -1,4 +1,113 @@
-<!DOCTYPE html>
+<script>
+    // 语言状态管理
+    let currentLanguage = 'zh'; // 默认中文
+    
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'zh' ? 'en' : 'zh';
+      updateLanguage();
+      
+      // 保存语言偏好到 localStorage（如果可用）
+      try {
+        localStorage.setItem('preferredLanguage', currentLanguage);
+      } catch (e) {
+        // 忽略 localStorage 错误
+      }
+    }
+    
+    function updateLanguage() {
+      const elements = document.querySelectorAll('[data-zh][data-en]');
+      elements.forEach(element => {
+        const text = currentLanguage === 'zh' ? element.getAttribute('data-zh') : element.getAttribute('data-en');
+        if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+          element.placeholder = text;
+        } else {
+          element.innerHTML = text;
+        }
+      });
+      
+      // 更新页面标题
+      document.title = currentLanguage === 'zh' ? '严海轩 - 个人学术主页' : 'Yan Haixuan - Academic Homepage';
+      
+      // 更新 meta 描述
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.content = currentLanguage === 'zh' 
+          ? '严海轩的个人学术主页，专注于人工智能和机器学习研究'
+          : 'Yan Haixuan\'s academic homepage, focusing on artificial intelligence and machine learning research';
+      }
+    }
+    
+    // 页面加载时恢复语言偏好
+    window.addEventListener('load', function() {
+      try {
+        const savedLanguage = localStorage.getItem('preferredLanguage');
+        if (savedLanguage && (savedLanguage === 'zh' || savedLanguage === 'en')) {
+          currentLanguage = savedLanguage;
+          updateLanguage();
+        }
+      } catch (e) {
+        // 忽略 localStorage 错误
+      }
+      
+      // 页面淡入效果
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in-out';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+    
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+
+    // 监听滚动，高亮当前导航项
+    window.addEventListener('scroll', function() {
+      const sections = ['about', 'news', 'publications', 'education', 'honors', 'contact'];
+      const navItems = document.querySelectorAll('.nav-item:not(.language-btn)');
+      
+      let currentSection = '';
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            currentSection = sectionId;
+          }
+        }
+      });
+      
+      navItems.forEach((item, index) => {
+        if (sections[index] === currentSection) {
+          item.style.color = '#0066cc';
+          item.style.fontWeight = 'bold';
+        } else {
+          item.style.color = '#333';
+          item.style.fontWeight = '500';
+        }
+      });
+    });
+
+    // 为所有paper-item添加点击动效
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.paper-item').forEach(item => {
+        item.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-3px)';
+        });
+        
+        item.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+    });
+  </script>
+      <!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
@@ -71,6 +180,20 @@
     
     .nav-item:hover {
       color: #0066cc;
+    }
+    
+    /* 语言切换按钮样式 */
+    .language-btn {
+      background: #0066cc !important;
+      color: white !important;
+      border-radius: 20px;
+      padding: 8px 16px !important;
+      margin-left: 20px;
+    }
+    
+    .language-btn:hover {
+      background: #004499 !important;
+      color: white !important;
     }
     
     /* 主体内容样式 */
@@ -288,12 +411,13 @@
   <!-- 导航栏 -->
   <nav class="nav-menu">
     <div class="nav-container">
-      <a class="nav-item" onclick="scrollToSection('about')">About Me</a>
-      <a class="nav-item" onclick="scrollToSection('news')">News</a>
-      <a class="nav-item" onclick="scrollToSection('publications')">Publications</a>
-      <a class="nav-item" onclick="scrollToSection('education')">Education</a>
-      <a class="nav-item" onclick="scrollToSection('honors')">Honors</a>
-      <a class="nav-item" onclick="scrollToSection('contact')">Contact</a>
+      <a class="nav-item" onclick="scrollToSection('about')" data-zh="关于我" data-en="About Me">关于我</a>
+      <a class="nav-item" onclick="scrollToSection('news')" data-zh="最新动态" data-en="News">最新动态</a>
+      <a class="nav-item" onclick="scrollToSection('publications')" data-zh="学术论文" data-en="Publications">学术论文</a>
+      <a class="nav-item" onclick="scrollToSection('education')" data-zh="教育背景" data-en="Education">教育背景</a>
+      <a class="nav-item" onclick="scrollToSection('honors')" data-zh="荣誉奖项" data-en="Honors">荣誉奖项</a>
+      <a class="nav-item" onclick="scrollToSection('contact')" data-zh="联系我" data-en="Contact">联系我</a>
+      <a class="nav-item language-btn" onclick="toggleLanguage()" data-zh="English" data-en="中文">English</a>
     </div>
   </nav>
 
@@ -315,8 +439,8 @@
             我的研究兴趣包括：深度学习、计算机视觉、自然语言处理等。
           </p>
           <div class="contact-links">
-            <a href="mailto:your.email@university.edu">📧 Email</a>
-            <a href="https://github.com/yourusername" target="_blank">💻 GitHub</a>
+            <a href="mailto:yanhaixuan4@gmail.com">📧 Email</a>
+            <a href="https://github.com/Bubble252" target="_blank">💻 GitHub</a>
             <a href="https://scholar.google.com/citations?user=XXXXX" target="_blank">📚 Google Scholar</a>
             <a href="https://linkedin.com/in/yourusername" target="_blank">💼 LinkedIn</a>
             <a href="/files/cv.pdf" target="_blank">📄 CV</a>
@@ -327,145 +451,111 @@
 
     <!-- News Section -->
     <section id="news" class="section">
-      <h2>🔥 News</h2>
+      <h2 data-zh="🔥 最新动态" data-en="🔥 News">🔥 最新动态</h2>
+      <div class="news-item">
+        <div class="news-date">2024.09:</div>
+        <div class="news-content" data-zh="进入重庆大学国家卓越工程师学院明月科创实验班" data-en="Entered Chongqing University National Academy of Excellence Engineers Mingyue Innovation Class">进入重庆大学国家卓越工程师学院明月科创实验班</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2024.06:</div>
+        <div class="news-content" data-zh="高中毕业，以优异成绩考入重庆大学" data-en="Graduated from high school and was admitted to Chongqing University with excellent grades">高中毕业，以优异成绩考入重庆大学</div>
+      </div>
       <div class="news-item">
         <div class="news-date">2024.03:</div>
-        <div class="news-content">两篇论文被 ICLR 2024 接收！</div>
+        <div class="news-content" data-zh="获得全国数学奥林匹克竞赛省级一等奖" data-en="Won first prize at provincial level in National Mathematical Olympiad">获得全国数学奥林匹克竞赛省级一等奖</div>
       </div>
       <div class="news-item">
         <div class="news-date">2023.12:</div>
-        <div class="news-content">获得国家奖学金</div>
-      </div>
-      <div class="news-item">
-        <div class="news-date">2023.09:</div>
-        <div class="news-content">开始在XXX大学攻读博士学位</div>
-      </div>
-      <div class="news-item">
-        <div class="news-date">2023.06:</div>
-        <div class="news-content">硕士毕业论文获得优秀毕业论文奖</div>
+        <div class="news-content" data-zh="完成第一个机器学习项目" data-en="Completed first machine learning project">完成第一个机器学习项目</div>
       </div>
     </section>
 
     <!-- Publications Section -->
     <section id="publications" class="section">
-      <h2>📝 Publications</h2>
+      <h2 data-zh="📝 学术论文" data-en="📝 Publications">📝 学术论文</h2>
       
       <div class="paper-item">
-        <div class="paper-title">
-          Your Amazing Paper Title: A Novel Approach to Something Important in Deep Learning
+        <div class="paper-title" data-zh="目前还没有正式发表的学术论文" data-en="No formal academic publications yet">
+          目前还没有正式发表的学术论文
         </div>
-        <div class="paper-authors">
-          <strong>你的姓名</strong>, 合作者1, 合作者2, 导师姓名
+        <div class="paper-authors" data-zh="作为本科一年级学生，我正在积极学习和准备未来的研究工作" data-en="As a first-year undergraduate student, I am actively learning and preparing for future research work">
+          作为本科一年级学生，我正在积极学习和准备未来的研究工作
         </div>
-        <div class="paper-venue">
-          International Conference on Learning Representations (ICLR) 2024
-        </div>
-        <div class="paper-links">
-          <a href="#" target="_blank">PDF</a>
-          <a href="#" target="_blank">Code</a>
-          <a href="#" target="_blank">Project</a>
-          <a href="#" target="_blank">Slides</a>
+        <div class="paper-venue" data-zh="敬请期待未来的学术成果" data-en="Stay tuned for future academic achievements">
+          敬请期待未来的学术成果
         </div>
       </div>
 
       <div class="paper-item">
-        <div class="paper-title">
-          Another Brilliant Research Work with Computer Vision Applications
+        <div class="paper-title" data-zh="机器学习课程项目：图像分类系统" data-en="Machine Learning Course Project: Image Classification System">
+          机器学习课程项目：图像分类系统
         </div>
         <div class="paper-authors">
-          合作者1, <strong>你的姓名</strong>, 合作者2, 导师姓名
+          <strong data-zh="严海轩" data-en="Yan Haixuan">严海轩</strong><span data-zh="，课程项目" data-en=", Course Project">, 课程项目</span>
         </div>
-        <div class="paper-venue">
-          Conference on Computer Vision and Pattern Recognition (CVPR) 2023
-        </div>
-        <div class="paper-links">
-          <a href="#" target="_blank">PDF</a>
-          <a href="#" target="_blank">Code</a>
-          <a href="#" target="_blank">Demo</a>
-        </div>
-      </div>
-
-      <div class="paper-item">
-        <div class="paper-title">
-          Innovative Machine Learning Framework for Real-world Applications
-        </div>
-        <div class="paper-authors">
-          <strong>你的姓名</strong>, 合作者1, 导师姓名
-        </div>
-        <div class="paper-venue">
-          Neural Information Processing Systems (NeurIPS) 2023
+        <div class="paper-venue" data-zh="重庆大学 2024" data-en="Chongqing University 2024">
+          重庆大学 2024
         </div>
         <div class="paper-links">
-          <a href="#" target="_blank">PDF</a>
-          <a href="#" target="_blank">Code</a>
-          <a href="#" target="_blank">Poster</a>
+          <a href="#" target="_blank" data-zh="代码" data-en="Code">代码</a>
+          <a href="#" target="_blank" data-zh="报告" data-en="Report">报告</a>
         </div>
       </div>
     </section>
 
     <!-- Education Section -->
     <section id="education" class="section">
-      <h2>🎓 Education</h2>
+      <h2 data-zh="🎓 教育背景" data-en="🎓 Education">🎓 教育背景</h2>
       <div class="paper-item">
-        <div class="paper-title">博士学位 - 计算机科学与技术</div>
-        <div class="paper-authors">XXX大学，导师：XXX教授</div>
-        <div class="paper-venue">2023.09 - 至今</div>
-        <p style="margin-top: 10px; color: #666;">主要研究方向：人工智能、深度学习、计算机视觉</p>
+        <div class="paper-title" data-zh="学士学位 - 工程类专业（明月科创实验班）" data-en="Bachelor's Degree - Engineering (Mingyue Innovation Class)">学士学位 - 机器人工程专业（明月科创实验班）</div>
+        <div class="paper-authors" data-zh="重庆大学 国家卓越工程师学院" data-en="Chongqing University, National Academy of Excellence Engineers">重庆大学 国家卓越工程师学院</div>
+        <div class="paper-venue">2024.09 - <span data-zh="预计2028.06" data-en="Expected 2028.06">预计2028.06</span></div>
+        <p style="margin-top: 10px; color: #666;" data-zh="主要学习方向：人工智能、机器学习、计算机科学基础" data-en="Main study areas: Artificial Intelligence, Machine Learning, Computer Science Fundamentals">主要学习方向：人工智能、机器学习、计算机科学基础</p>
       </div>
       <div class="paper-item">
-        <div class="paper-title">硕士学位 - 计算机科学与技术</div>
-        <div class="paper-authors">XXX大学</div>
-        <div class="paper-venue">2021.09 - 2023.06</div>
-        <p style="margin-top: 10px; color: #666;">GPA: 3.8/4.0，硕士毕业论文获得优秀论文奖</p>
-      </div>
-      <div class="paper-item">
-        <div class="paper-title">学士学位 - 计算机科学与技术</div>
-        <div class="paper-authors">XXX大学</div>
-        <div class="paper-venue">2017.09 - 2021.06</div>
-        <p style="margin-top: 10px; color: #666;">GPA: 3.9/4.0，专业排名前5%</p>
+        <div class="paper-title" data-zh="高中毕业" data-en="High School Graduation">高中毕业</div>
+        <div class="paper-authors" data-zh="XXX高中" data-en="XXX High School">XXX高中</div>
+        <div class="paper-venue">2021.09 - 2024.06</div>
+        <p style="margin-top: 10px; color: #666;" data-zh="优异成绩毕业，专注理科学习" data-en="Graduated with excellent grades, focused on science subjects">优异成绩毕业，专注理科学习</p>
       </div>
     </section>
 
     <!-- Honors Section -->
     <section id="honors" class="section">
-      <h2>🏆 Honors and Awards</h2>
+      <h2 data-zh="🏆 荣誉奖项" data-en="🏆 Honors and Awards">🏆 荣誉奖项</h2>
       <div class="news-item">
         <div class="news-date">2024:</div>
-        <div class="news-content">优秀研究生奖学金一等奖</div>
+        <div class="news-content" data-zh="重庆大学新生奖学金" data-en="Chongqing University Freshman Scholarship">重庆大学新生奖学金</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2024:</div>
+        <div class="news-content" data-zh="全国数学奥林匹克竞赛省级一等奖" data-en="First Prize in National Mathematical Olympiad (Provincial Level)">全国数学奥林匹克竞赛省级一等奖</div>
       </div>
       <div class="news-item">
         <div class="news-date">2023:</div>
-        <div class="news-content">ICLR 2024 Outstanding Paper Award</div>
-      </div>
-      <div class="news-item">
-        <div class="news-date">2023:</div>
-        <div class="news-content">国家奖学金</div>
+        <div class="news-content" data-zh="高中优秀学生干部" data-en="Outstanding Student Leader in High School">高中优秀学生干部</div>
       </div>
       <div class="news-item">
         <div class="news-date">2022:</div>
-        <div class="news-content">优秀毕业生</div>
-      </div>
-      <div class="news-item">
-        <div class="news-date">2021:</div>
-        <div class="news-content">ACM-ICPC 区域赛银奖</div>
+        <div class="news-content" data-zh="全国中学生物理竞赛二等奖" data-en="Second Prize in National Physics Competition for High School Students">全国中学生物理竞赛二等奖</div>
       </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="section">
-      <h2>📮 Contact</h2>
+      <h2 data-zh="📮 联系我" data-en="📮 Contact">📮 联系我</h2>
       <div class="paper-item">
-        <p><strong>邮箱：</strong> your.email@university.edu</p>
-        <p><strong>地址：</strong> XXX大学XXX学院XXX实验室</p>
-        <p><strong>办公室：</strong> XXX楼XXX室</p>
-        <p><strong>电话：</strong> +86 XXX-XXXX-XXXX</p>
+        <p><strong data-zh="邮箱：" data-en="Email: ">邮箱：</strong> yanhaixuan4@gamil.com</p>
+        <p><strong data-zh="地址：" data-en="Address: ">地址：</strong> <span data-zh="重庆大学国家卓越工程师学院" data-en="Chongqing University National Academy of Excellence Engineers">重庆大学国家卓越工程师学院</span></p>
+        <p><strong data-zh="宿舍：" data-en="Dormitory: ">宿舍：</strong> <span data-zh="XXX楼XXX室" data-en="Room XXX, Building XXX">XXX楼XXX室</span></p>
+        <p><strong data-zh="微信：" data-en="WeChat: ">微信：</strong> Gatsbybq9068w1</p>
         <div style="margin-top: 20px;">
-          <p><strong>欢迎联系我讨论：</strong></p>
+          <p><strong data-zh="欢迎联系我讨论：" data-en="Welcome to contact me to discuss: ">欢迎联系我讨论：</strong></p>
           <ul style="margin-left: 20px; margin-top: 10px; color: #666;">
-            <li>学术合作机会</li>
-            <li>研究项目交流</li>
-            <li>实习或工作机会</li>
-            <li>技术问题探讨</li>
+            <li data-zh="学习交流和合作" data-en="Academic exchange and cooperation">学习交流和合作</li>
+            <li data-zh="技术问题探讨" data-en="Technical problem discussion">技术问题探讨</li>
+            <li data-zh="项目合作机会" data-en="Project collaboration opportunities">项目合作机会</li>
+            <li data-zh="学术活动参与" data-en="Academic activity participation">学术活动参与</li>
           </ul>
         </div>
       </div>
@@ -473,9 +563,9 @@
   </div>
 
   <footer style="text-align: center; padding: 40px 0; color: #666; border-top: 1px solid #eee; margin-top: 40px;">
-    <p>&copy; 2024 你的姓名. All rights reserved.</p>
-    <p style="margin-top: 10px; font-size: 14px;">
-      Last updated: 2025/9/26
+    <p data-zh="&copy; 2024 严海轩. 版权所有." data-en="&copy; 2024 Yan Haixuan. All rights reserved.">&copy; 2024 严海轩. 版权所有.</p>
+    <p style="margin-top: 10px; font-size: 14px;" data-zh="最后更新：2025/9/26" data-en="Last updated: 9/26/2025">
+      最后更新：2025/9/26
     </p>
   </footer>
 
