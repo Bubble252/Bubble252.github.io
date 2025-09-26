@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>王小明</title>
+  <meta name="description" content="专注于深度学习与计算机视觉研究，特别是目标检测和图像分割">
+  <meta name="keywords" content="深度学习,计算机视觉,目标检测,图像分割,PyTorch">
+  <meta name="author" content="王小明">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="王小明">
+  <meta property="og:description" content="专注于深度学习与计算机视觉研究，特别是目标检测和图像分割">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://Bubble252.github.io">
+  
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="王小明">
+  <meta name="twitter:description" content="专注于深度学习与计算机视觉研究，特别是目标检测和图像分割">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #ffffff;
+    }
+    
+    /* 导航栏样式 */
+    .nav-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 15px 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 0 20px;
+    }
+    
+    .nav-item {
+      color: #333;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .nav-item:hover {
+      color: #0066cc;
+    }
+    
+    /* 主体内容样式 */
+    .main-content {
+      margin-top: 80px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+    }
+    
+    .section {
+      margin-bottom: 80px;
+      scroll-margin-top: 100px;
+    }
+    
+    .section h2 {
+      border-bottom: 3px solid #0066cc;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+      color: #333;
+      font-size: 28px;
+      font-weight: 600;
+    }
+    
+    /* 个人简介样式 */
+    .profile-section {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+      margin-bottom: 40px;
+    }
+    
+    .profile-image {
+      flex-shrink: 0;
+    }
+    
+    .profile-image img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .profile-info {
+      flex: 1;
+    }
+    
+    .profile-info h1 {
+      font-size: 36px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    
+    .profile-info h3 {
+      font-size: 20px;
+      color: #0066cc;
+      margin-bottom: 5px;
+    }
+    
+    .contact-links {
+      margin-top: 20px;
+    }
+    
+    .contact-links a {
+      display: inline-block;
+      margin-right: 15px;
+      margin-bottom: 10px;
+      padding: 8px 16px;
+      background: #f8f9fa;
+      border-radius: 20px;
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-links a:hover {
+      background: #0066cc;
+      color: white;
+    }
+    
+    /* 论文列表样式 */
+    .paper-item {
+      background: #f8f9fa;
+      padding: 25px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      border-left: 4px solid #0066cc;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .paper-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .paper-title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      line-height: 1.4;
+    }
+    
+    .paper-authors {
+      color: #666;
+      margin-bottom: 8px;
+    }
+    
+    .paper-venue {
+      font-style: italic;
+      color: #0066cc;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    
+    .paper-links a {
+      margin-right: 10px;
+      padding: 6px 12px;
+      background: #0066cc;
+      color: white;
+      text-decoration: none;
+      border-radius: 15px;
+      font-size: 12px;
+      transition: background 0.3s ease;
+    }
+    
+    .paper-links a:hover {
+      background: #004499;
+    }
+    
+    /* 新闻列表样式 */
+    .news-item {
+      display: flex;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .news-date {
+      font-weight: bold;
+      color: #0066cc;
+      width: 100px;
+      flex-shrink: 0;
+    }
+    
+    .news-content {
+      flex: 1;
+      color: #333;
+    }
+    
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .nav-container {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .nav-item {
+        font-size: 14px;
+      }
+      
+      .profile-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      
+      .profile-info h1 {
+        font-size: 28px;
+      }
+      
+      .news-item {
+        flex-direction: column;
+      }
+      
+      .news-date {
+        width: auto;
+        margin-bottom: 5px;
+      }
+      
+      .main-content {
+        padding: 0 15px;
+      }
+      
+      .section h2 {
+        font-size: 24px;
+      }
+    }
+    
+    /* 滚动条样式 */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #0066cc;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #004499;
+    }
+  </style>
+<meta name="generator" content="Hexo 8.0.0"></head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="nav-menu">
+    <div class="nav-container">
+      <a class="nav-item" onclick="scrollToSection('about')">About Me</a>
+      <a class="nav-item" onclick="scrollToSection('news')">News</a>
+      <a class="nav-item" onclick="scrollToSection('publications')">Publications</a>
+      <a class="nav-item" onclick="scrollToSection('education')">Education</a>
+      <a class="nav-item" onclick="scrollToSection('honors')">Honors</a>
+      <a class="nav-item" onclick="scrollToSection('contact')">Contact</a>
+    </div>
+  </nav>
+
+  <!-- 主要内容 -->
+  <div class="main-content">
+    <!-- About Me Section -->
+    <section id="about" class="section">
+      <div class="profile-section">
+        <div class="profile-image">
+          <img src="/images/profile.jpg" alt="个人照片">
+        </div>
+        <div class="profile-info">
+          <h1>你的姓名</h1>
+          <h3>博士研究生</h3>
+          <p>XXX大学 计算机科学与技术学院</p>
+          <p>
+            我专注于人工智能、机器学习和计算机视觉领域的研究，特别是在深度学习、神经网络优化和计算机视觉应用方面有深入研究。
+            目前在XXX大学攻读博士学位，师从XXX教授。
+            我的研究兴趣包括：深度学习、计算机视觉、自然语言处理等。
+          </p>
+          <div class="contact-links">
+            <a href="mailto:your.email@university.edu">📧 Email</a>
+            <a href="https://github.com/yourusername" target="_blank">💻 GitHub</a>
+            <a href="https://scholar.google.com/citations?user=XXXXX" target="_blank">📚 Google Scholar</a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank">💼 LinkedIn</a>
+            <a href="/files/cv.pdf" target="_blank">📄 CV</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="section">
+      <h2>🔥 News</h2>
+      <div class="news-item">
+        <div class="news-date">2024.03:</div>
+        <div class="news-content">两篇论文被 ICLR 2024 接收！</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023.12:</div>
+        <div class="news-content">获得国家奖学金</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023.09:</div>
+        <div class="news-content">开始在XXX大学攻读博士学位</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023.06:</div>
+        <div class="news-content">硕士毕业论文获得优秀毕业论文奖</div>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="section">
+      <h2>📝 Publications</h2>
+      
+      <div class="paper-item">
+        <div class="paper-title">
+          Your Amazing Paper Title: A Novel Approach to Something Important in Deep Learning
+        </div>
+        <div class="paper-authors">
+          <strong>你的姓名</strong>, 合作者1, 合作者2, 导师姓名
+        </div>
+        <div class="paper-venue">
+          International Conference on Learning Representations (ICLR) 2024
+        </div>
+        <div class="paper-links">
+          <a href="#" target="_blank">PDF</a>
+          <a href="#" target="_blank">Code</a>
+          <a href="#" target="_blank">Project</a>
+          <a href="#" target="_blank">Slides</a>
+        </div>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-title">
+          Another Brilliant Research Work with Computer Vision Applications
+        </div>
+        <div class="paper-authors">
+          合作者1, <strong>你的姓名</strong>, 合作者2, 导师姓名
+        </div>
+        <div class="paper-venue">
+          Conference on Computer Vision and Pattern Recognition (CVPR) 2023
+        </div>
+        <div class="paper-links">
+          <a href="#" target="_blank">PDF</a>
+          <a href="#" target="_blank">Code</a>
+          <a href="#" target="_blank">Demo</a>
+        </div>
+      </div>
+
+      <div class="paper-item">
+        <div class="paper-title">
+          Innovative Machine Learning Framework for Real-world Applications
+        </div>
+        <div class="paper-authors">
+          <strong>你的姓名</strong>, 合作者1, 导师姓名
+        </div>
+        <div class="paper-venue">
+          Neural Information Processing Systems (NeurIPS) 2023
+        </div>
+        <div class="paper-links">
+          <a href="#" target="_blank">PDF</a>
+          <a href="#" target="_blank">Code</a>
+          <a href="#" target="_blank">Poster</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+      <h2>🎓 Education</h2>
+      <div class="paper-item">
+        <div class="paper-title">博士学位 - 计算机科学与技术</div>
+        <div class="paper-authors">XXX大学，导师：XXX教授</div>
+        <div class="paper-venue">2023.09 - 至今</div>
+        <p style="margin-top: 10px; color: #666;">主要研究方向：人工智能、深度学习、计算机视觉</p>
+      </div>
+      <div class="paper-item">
+        <div class="paper-title">硕士学位 - 计算机科学与技术</div>
+        <div class="paper-authors">XXX大学</div>
+        <div class="paper-venue">2021.09 - 2023.06</div>
+        <p style="margin-top: 10px; color: #666;">GPA: 3.8/4.0，硕士毕业论文获得优秀论文奖</p>
+      </div>
+      <div class="paper-item">
+        <div class="paper-title">学士学位 - 计算机科学与技术</div>
+        <div class="paper-authors">XXX大学</div>
+        <div class="paper-venue">2017.09 - 2021.06</div>
+        <p style="margin-top: 10px; color: #666;">GPA: 3.9/4.0，专业排名前5%</p>
+      </div>
+    </section>
+
+    <!-- Honors Section -->
+    <section id="honors" class="section">
+      <h2>🏆 Honors and Awards</h2>
+      <div class="news-item">
+        <div class="news-date">2024:</div>
+        <div class="news-content">优秀研究生奖学金一等奖</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023:</div>
+        <div class="news-content">ICLR 2024 Outstanding Paper Award</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2023:</div>
+        <div class="news-content">国家奖学金</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2022:</div>
+        <div class="news-content">优秀毕业生</div>
+      </div>
+      <div class="news-item">
+        <div class="news-date">2021:</div>
+        <div class="news-content">ACM-ICPC 区域赛银奖</div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+      <h2>📮 Contact</h2>
+      <div class="paper-item">
+        <p><strong>邮箱：</strong> your.email@university.edu</p>
+        <p><strong>地址：</strong> XXX大学XXX学院XXX实验室</p>
+        <p><strong>办公室：</strong> XXX楼XXX室</p>
+        <p><strong>电话：</strong> +86 XXX-XXXX-XXXX</p>
+        <div style="margin-top: 20px;">
+          <p><strong>欢迎联系我讨论：</strong></p>
+          <ul style="margin-left: 20px; margin-top: 10px; color: #666;">
+            <li>学术合作机会</li>
+            <li>研究项目交流</li>
+            <li>实习或工作机会</li>
+            <li>技术问题探讨</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer style="text-align: center; padding: 40px 0; color: #666; border-top: 1px solid #eee; margin-top: 40px;">
+    <p>&copy; 2024 你的姓名. All rights reserved.</p>
+    <p style="margin-top: 10px; font-size: 14px;">
+      Last updated: 2025/9/26
+    </p>
+  </footer>
+
+  <script>
+    function scrollToSection(sectionId) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+
+    // 监听滚动，高亮当前导航项
+    window.addEventListener('scroll', function() {
+      const sections = ['about', 'news', 'publications', 'education', 'honors', 'contact'];
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      let currentSection = '';
+      sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          const rect = section.getBoundingClientRect();
+          if (rect.top <= 120 && rect.bottom >= 120) {
+            currentSection = sectionId;
+          }
+        }
+      });
+      
+      navItems.forEach((item, index) => {
+        if (sections[index] === currentSection) {
+          item.style.color = '#0066cc';
+          item.style.fontWeight = 'bold';
+        } else {
+          item.style.color = '#333';
+          item.style.fontWeight = '500';
+        }
+      });
+    });
+
+    // 平滑加载动画
+    window.addEventListener('load', function() {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in-out';
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+
+    // 为所有paper-item添加点击动效
+    document.querySelectorAll('.paper-item').forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-3px)';
+      });
+      
+      item.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>
